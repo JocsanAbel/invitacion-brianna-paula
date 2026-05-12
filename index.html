@@ -246,7 +246,6 @@
         </label>
         <div class="actions">
           <button class="btn" type="submit">Enviar confirmación</button>
-          <button class="btn secondary" type="button" id="copyBtn">Copiar mensaje</button>
         </div>
       </form>
     </section>
@@ -303,8 +302,6 @@
         modal.showModal();
       }
     });
-
-    document.getElementById('copyBtn').addEventListener('click', () => copyText(buildMessage()));
     document.getElementById('copyModal').addEventListener('click', () => copyText(preview.textContent));
     document.getElementById('closeModal').addEventListener('click', () => modal.close());
   </script>
