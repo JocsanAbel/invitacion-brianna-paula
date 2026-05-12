@@ -102,7 +102,47 @@
     }
     textarea { min-height:96px; resize:vertical; }
     .two { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    .note { background: rgba(8,120,120,.08); border-radius:18px; padding:14px; text-align:center; color:var(--teal-dark); font-weight:700; }
+    .pool-info {
+      max-width:760px;
+      margin: 28px auto 0;
+      background: rgba(255,255,255,.82);
+      border: 2px solid rgba(216,165,49,.40);
+      border-radius: 24px;
+      padding: 20px 18px;
+      text-align:center;
+      color:var(--brown);
+      font-weight:700;
+      line-height:1.55;
+      box-shadow: 0 12px 30px rgba(7,90,93,.10);
+    }
+    .pool-info strong { display:block; color:var(--teal); font-size:1.08rem; margin-bottom:4px; }
+
+    .gif-section {
+      max-width:760px;
+      margin: 18px auto 0;
+      text-align:center;
+    }
+    .gif-card {
+      background: rgba(255,255,255,.84);
+      border: 2px solid rgba(216,165,49,.38);
+      border-radius: 26px;
+      padding: 14px;
+      box-shadow: 0 12px 30px rgba(7,90,93,.10);
+    }
+    .gif-card img {
+      width:100%;
+      max-width:420px;
+      display:block;
+      margin:0 auto;
+      border-radius:20px;
+      border: 1px solid rgba(216,165,49,.35);
+    }
+    .gif-caption {
+      margin-top:10px;
+      color:var(--teal);
+      font-weight:800;
+      font-size:1rem;
+    }
     .actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:6px; }
     .footer { text-align:center; margin:28px 0 0; color:var(--brown); font-weight:700; }
     .wave { height:52px; margin-top:18px; background: linear-gradient(135deg, transparent 30%, rgba(20,170,165,.25) 30% 45%, transparent 45% 60%, rgba(238,93,118,.18) 60% 75%, transparent 75%); border-radius: 999px; opacity:.75; }
@@ -141,6 +181,40 @@
       </div>
     </div>
 
+    <section class="pool-info" aria-label="Información importante para la fiesta">
+      <strong>Será un día de alberca.</strong>
+      Lleva tu cambio de ropa y todo lo necesario para que podamos disfrutar en familia.<br>
+      Y no olvides confirmar si estarás presente.
+    </section>
+
+
+    <section class="gif-section" aria-label="GIF tropical">
+  <div class="gif-card">
+    <iframe 
+      src="https://giphy.com/embed/aKBlpJ5U5rJqA31MfR"
+      width="100%" 
+      height="270" 
+      frameborder="0" 
+      class="giphy-embed" 
+      allowfullscreen>
+    </iframe>
+    <div class="gif-caption">🌴 ¡Prepárate para un día muy divertido en familia! 🌊</div>
+  </div>
+</section>
+
+<section class="gif-section" aria-label="Segundo GIF tropical">
+  <div class="gif-card">
+    <iframe 
+      src="https://giphy.com/embed/HsL6Rx4XpG88HuJrnM"
+      width="100%" 
+      height="270" 
+      frameborder="0" 
+      class="giphy-embed" 
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
     <section id="confirmar" class="rsvp">
       <h2>Confirma tu asistencia</h2>
       <p>Llena los datos y se preparará un mensaje para enviar por WhatsApp.</p>
@@ -165,7 +239,6 @@
         <label>Mensaje para Brianna Paula
           <textarea id="mensaje" name="mensaje" placeholder="Opcional"></textarea>
         </label>
-        <div class="note">Favor de confirmar su asistencia😊</div>
         <div class="actions">
           <button class="btn" type="submit">Enviar confirmación</button>
           <button class="btn secondary" type="button" id="copyBtn">Copiar mensaje</button>
@@ -189,7 +262,7 @@
 
   <script>
     // Pon aquí el número con lada, sin signos ni espacios. Ejemplo México: 5216141234567
-    const WHATSAPP_NUMBER = "526562601248";
+    const WHATSAPP_NUMBER = "526566267535";
 
     const form = document.getElementById('rsvpForm');
     const modal = document.getElementById('modal');
@@ -201,13 +274,13 @@
       const personas = document.getElementById('personas').value;
       const acompanantes = document.getElementById('acompanantes').value.trim() || 'Sin acompañantes anotados';
       const mensaje = document.getElementById('mensaje').value.trim() || 'Sin mensaje adicional';
-      return `Hola, confirmo asistencia para los *13 años* de Brianna Paula.
+      return `Hola, confirmo asistencia para los 13 años de Brianna Paula.
 
-*Nombre:* ${nombre}
-*Asistencia:* ${asistencia}
-*Personas:* ${personas}
-*Acompañantes:* ${acompanantes}
-*Mensaje:* ${mensaje}`;
+Nombre: ${nombre}
+Asistencia: ${asistencia}
+Personas: ${personas}
+Acompañantes: ${acompanantes}
+Mensaje: ${mensaje}`;
     }
 
     async function copyText(text) {
