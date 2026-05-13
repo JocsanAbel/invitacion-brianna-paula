@@ -223,31 +223,61 @@
     <section id="confirmar" class="rsvp">
       <h2>Confirma tu asistencia</h2>
       <p>Llena los datos y se preparará un mensaje para enviar por WhatsApp.</p>
-      <form id="rsvpForm">
-        <label>Nombre de quien confirma
-          <input id="nombre" name="nombre" required placeholder="Ej. María López">
-        </label>
-        <div class="two">
-          <label>¿Asistirás?
-            <select id="asistencia" name="asistencia" required>
-              <option value="Sí asistiré">Sí asistiré</option>
-              <option value="No podré asistir">No podré asistir</option>
-            </select>
-          </label>
-          <label>Número de personas
-            <input id="personas" name="personas" type="number" min="1" max="20" value="1" required>
-          </label>
-        </div>
-        <label>Nombre de acompañantes
-          <textarea id="acompanantes" name="acompanantes" placeholder="Opcional"></textarea>
-        </label>
-        <label>Mensaje para Brianna Paula
-          <textarea id="mensaje" name="mensaje" placeholder="Opcional"></textarea>
-        </label>
-        <div class="actions">
-          <button class="btn" type="submit">Enviar confirmación</button>
-        </div>
-      </form>
+     <iframe name="googleFormFrame" style="display:none;"></iframe>
+
+<form 
+  id="rsvpForm"
+  action="https://docs.google.com/forms/d/e/1FAIpQLScuRtQf32JKriHFL6EnoHahmFeSoexwBcg5I5UWsxaHxM21sA/formResponse"
+  method="POST"
+  target="googleFormFrame"
+  onsubmit="mostrarGracias()">
+
+  <label>Nombre de quien confirma
+    <input 
+      name="entry.587479704" 
+      required 
+      placeholder="Ej. María López">
+  </label>
+
+  <div class="two">
+    <label>¿Asistirás?
+      <select name="entry.1385633738" required>
+        <option value="Sí asistiré">Sí asistiré</option>
+        <option value="No podré asistir">No podré asistir</option>
+      </select>
+    </label>
+
+    <label>Número de personas
+      <input 
+        name="entry.2044310896" 
+        type="number" 
+        min="1" 
+        max="20" 
+        value="1" 
+        required>
+    </label>
+  </div>
+
+  <label>Nombre de acompañantes
+    <textarea 
+      name="entry.1047447317" 
+      placeholder="Opcional"></textarea>
+  </label>
+
+  <label>Mensaje para Brianna Paula
+    <textarea 
+      name="entry.1832770927" 
+      placeholder="Opcional"></textarea>
+  </label>
+
+  <div class="actions">
+    <button class="btn" type="submit">Enviar confirmación</button>
+  </div>
+
+  <p id="graciasMsg" style="display:none; text-align:center; color:#087878; font-weight:900; margin-top:15px;">
+    🌺 ¡Gracias! Tu confirmación fue enviada.
+  </p>
+</form>
     </section>
     <div class="footer">🌊 Te esperamos para celebrar en grande 🌺</div>
   </main>
@@ -264,46 +294,16 @@
     </div>
   </dialog>
 
-  <script>
-    // Pon aquí el número con lada, sin signos ni espacios. Ejemplo México: 5216141234567
-    const WHATSAPP_NUMBER = "526566267535";
+ <script>
+  function mostrarGracias() {
+    setTimeout(() => {
+      const mensaje = document.getElementById('graciasMsg');
+      const form = document.getElementById('rsvpForm');
 
-    const form = document.getElementById('rsvpForm');
-    const modal = document.getElementById('modal');
-    const preview = document.getElementById('preview');
-
-    function buildMessage() {
-      const nombre = document.getElementById('nombre').value.trim();
-      const asistencia = document.getElementById('asistencia').value;
-      const personas = document.getElementById('personas').value;
-      const acompanantes = document.getElementById('acompanantes').value.trim() || 'Sin acompañantes anotados';
-      const mensaje = document.getElementById('mensaje').value.trim() || 'Sin mensaje adicional';
-      return `Hola, confirmo asistencia para los *13 años* de *Brianna Paula.*
-
-*Nombre:* ${nombre}
-*Asistencia:* ${asistencia}
-*Personas:* ${personas}
-*Acompañantes:* ${acompanantes}
-*Mensaje:* ${mensaje}`;
-    }
-
-    async function copyText(text) {
-      try { await navigator.clipboard.writeText(text); alert('Mensaje copiado'); }
-      catch(e) { preview.textContent = text; modal.showModal(); }
-    }
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const text = buildMessage();
-      if (WHATSAPP_NUMBER.trim()) {
-        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
-      } else {
-        preview.textContent = text;
-        modal.showModal();
-      }
-    });
-    document.getElementById('copyModal').addEventListener('click', () => copyText(preview.textContent));
-    document.getElementById('closeModal').addEventListener('click', () => modal.close());
-  </script>
+      mensaje.style.display = 'block';
+      form.reset();
+    }, 800);
+  }
+</script>
 </body>
 </html>
